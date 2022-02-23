@@ -150,7 +150,8 @@ func (c *JWTClaims) ToMap() map[string]interface{} {
 		}
 		// hack for celonis
 		if c.ScopeField == JWTScopeFieldUnset || c.ScopeField == JWTScopeFieldString || c.ScopeField == JWTScopeFieldBoth {
-			ret["scope"] = strings.Join(c.Scope, " ")
+			//ret["scope"] = strings.Join(c.Scope, " ")
+			ret["scope"] = c.Scope
 		}
 	} else {
 		delete(ret, "scp")
