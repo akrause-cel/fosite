@@ -145,10 +145,11 @@ func (c *JWTClaims) ToMap() map[string]interface{} {
 
 	if c.Scope != nil {
 		// ScopeField default (when value is JWTScopeFieldUnset) is the list for backwards compatibility with old versions of fosite.
-		if c.ScopeField == JWTScopeFieldUnset || c.ScopeField == JWTScopeFieldList || c.ScopeField == JWTScopeFieldBoth {
+		if c.ScopeField == JWTScopeFieldList || c.ScopeField == JWTScopeFieldBoth {
 			ret["scp"] = c.Scope
 		}
-		if c.ScopeField == JWTScopeFieldString || c.ScopeField == JWTScopeFieldBoth {
+		// hack for celonis
+		if c.ScopeField == JWTScopeFieldUnset || c.ScopeField == JWTScopeFieldString || c.ScopeField == JWTScopeFieldBoth {
 			ret["scope"] = strings.Join(c.Scope, " ")
 		}
 	} else {
